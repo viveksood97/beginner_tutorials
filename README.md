@@ -16,6 +16,7 @@ cd ~/catkin_ws/src/
 git clone https://github.com/viveksood97/beginner_tutorials
 cd ../
 source /opt/ros/melodic/setup.bash
+source ~/catkin_ws/devel/setup.bash
 catkin build
 ```
 ## Run
@@ -30,12 +31,14 @@ Run talker node (Open a new Terminal)
 ```
 cd ~/catkin_ws/
 source /opt/ros/melodic/setup.bash
+source ~/catkin_ws/devel/setup.bash
 rosrun beginner_tutorials talker
 ```
 Run listener node (Open a new Terminal)
 ```
 cd ~/catkin_ws/
 source /opt/ros/melodic/setup.bash
+source ~/catkin_ws/devel/setup.bash
 rosrun beginner_tutorials listener
 ```
 ## Run cppcheck and cpplint

@@ -6,8 +6,8 @@ Project is a part of 808X coursework wherein the aim is to get familiarized with
 Task 1: Create a publisher that publishes a custom string message which is then subscribed by the subscriber.
 
 # Dependencies
-- Ubuntu 18.04
-- ROS Melodic
+- Ubuntu 20.04
+- ROS Noetic
 
 ## Building package via command-line
 ```
@@ -15,7 +15,7 @@ mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src/
 git clone https://github.com/viveksood97/beginner_tutorials
 cd ../
-source /opt/ros/melodic/setup.bash
+source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
 catkin build
 ```
@@ -24,20 +24,20 @@ catkin build
 Run roscore (Open a new Terminal)
 ```
 cd ~/catkin_ws/
-source /opt/ros/melodic/setup.bash
+source /opt/ros/noetic/setup.bash
 roscore
 ```
 Run talker node (Open a new Terminal)
 ```
 cd ~/catkin_ws/
-source /opt/ros/melodic/setup.bash
+source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
 rosrun beginner_tutorials talker
 ```
 Run listener node (Open a new Terminal)
 ```
 cd ~/catkin_ws/
-source /opt/ros/melodic/setup.bash
+source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
 rosrun beginner_tutorials listener
 ```

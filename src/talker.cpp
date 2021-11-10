@@ -15,7 +15,9 @@
 std::string currentString = "Default String";
 
 
-bool changeCurrentString(beginner_tutorials::changeString::Request &request, beginner_tutorials::changeString::Response &response) {
+bool changeCurrentString(
+  beginner_tutorials::changeString::Request &request,
+  beginner_tutorials::changeString::Response &response) {
   response.after = request.before;
   currentString = response.after;
   return true;
@@ -36,7 +38,6 @@ int main(int argc, char **argv) {
    * part of the ROS system.
    */
   ros::init(argc, argv, "talker");
-  
 
   /**
    * NodeHandle is the main access point to communications with the ROS system.
@@ -44,7 +45,8 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
-  ros::ServiceServer server = n.advertiseService("change_string", changeCurrentString);
+  ros::ServiceServer server =
+  n.advertiseService("change_string", changeCurrentString);
 
   /**
    * The advertise() function is how you tell ROS that you want to
@@ -72,17 +74,31 @@ int main(int argc, char **argv) {
    * a unique string for each message.
    */
   int count = 0;
+  if (!ros::ok()) {
+    ROS_FATAL_STREAM("FATAL ERROR: ros::ok() is False");
+  }
   while (ros::ok()) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
     std_msgs::String msg;
 
+    if (currentString == "Default String") {
+      ROS_WARN_STREAM("The default string is still unchanged");
+    }
+
+
     std::stringstream ss;
     ss << "Vivek's talker has sent " << currentString << " " << count << " times";
     msg.data = ss.str();
+    if (currentString.size() == 0) {
+      ROS_ERROR_STREAM("Empty message not allowed");
+    } else {
+      ROS_DEBUG_STREAM("Updated String: " << currentString);
+      chatter_pub.publish(msg);
+    }
 
-    //ROS_INFO("%s", msg.data.c_str());
+    ROS_INFO_STREAM(msg.data.c_str());
 
     /**
      * The publish() function is how you send messages. The parameter
@@ -90,7 +106,6 @@ int main(int argc, char **argv) {
      * given as a template parameter to the advertise<>() call, as was done
      * in the constructor above.
       */
-     chatter_pub.publish(msg);
 
      ros::spinOnce();
 

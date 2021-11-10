@@ -1,7 +1,6 @@
 // Copyright (c) 2021 Vivek Sood
 // Licensed under the MIT License.
 
-
 /// @file   talker.cpp
 /// @author Vivek Sood
 /// @brief ROS Tutorial: Writing Basic Publisher
@@ -12,12 +11,11 @@
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeString.h"
 
-std::string currentString = "Default String";
-
+std::string currentString;
 
 bool changeCurrentString(
-  beginner_tutorials::changeString::Request &request,
-  beginner_tutorials::changeString::Response &response) {
+    beginner_tutorials::changeString::Request &request,
+    beginner_tutorials::changeString::Response &response) {
   response.after = request.before;
   currentString = response.after;
   return true;
@@ -37,18 +35,24 @@ int main(int argc, char **argv) {
    * You must call one of the versions of ros::init() before using any other
    * part of the ROS system.
    */
+  currentString = argv[1];
   ros::init(argc, argv, "talker");
 
-  /**
+  if (!ros::ok()) {
+    ROS_FATAL_STREAM("ros::ok false");
+    return 1;
+  }
+
+    /**
    * NodeHandle is the main access point to communications with the ROS system.
    * The first NodeHandle constructed will fully initialize this node, and the last
    * NodeHandle destructed will close down the node.
    */
-  ros::NodeHandle n;
-  ros::ServiceServer server =
-  n.advertiseService("change_string", changeCurrentString);
+    ros::NodeHandle n;
+    ros::ServiceServer server =
+        n.advertiseService("change_string", changeCurrentString);
 
-  /**
+    /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
    * master node, which keeps a registry of who is publishing and who
@@ -65,54 +69,52 @@ int main(int argc, char **argv) {
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+    ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
-  ros::Rate loop_rate(10);
+    ros::Rate loop_rate(10);
 
-  /**
+    /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
    */
-  int count = 0;
-  if (!ros::ok()) {
-    ROS_FATAL_STREAM("FATAL ERROR: ros::ok() is False");
-  }
-  while (ros::ok()) {
-    /**
+    int count = 0;
+
+    while (ros::ok()) {
+      /**
      * This is a message object. You stuff it with data, and then publish it.
      */
-    std_msgs::String msg;
+      std_msgs::String msg;
 
-    if (currentString == "Default String") {
-      ROS_WARN_STREAM("The default string is still unchanged");
-    }
+      if (currentString == "DEFAULT") {
+        ROS_WARN_STREAM("The default string is still unchanged, use service");
+      }
 
+      std::stringstream ss;
+      ss << "Vivek's talker has sent " << currentString << " " << count << " times";
+      msg.data = ss.str();
+      if (currentString.size() == 0) {
+        ROS_ERROR_STREAM("Empty message not allowed");
+      } else {
+        ROS_DEBUG_STREAM("Updated String: " << currentString);
+        chatter_pub.publish(msg);
+      }
 
-    std::stringstream ss;
-    ss << "Vivek's talker has sent " << currentString << " " << count << " times";
-    msg.data = ss.str();
-    if (currentString.size() == 0) {
-      ROS_ERROR_STREAM("Empty message not allowed");
-    } else {
-      ROS_DEBUG_STREAM("Updated String: " << currentString);
-      chatter_pub.publish(msg);
-    }
+      ROS_INFO_STREAM(msg.data.c_str());
 
-    ROS_INFO_STREAM(msg.data.c_str());
-
-    /**
+      /**
      * The publish() function is how you send messages. The parameter
      * is the message object. The type of this object must agree with the type
      * given as a template parameter to the advertise<>() call, as was done
      * in the constructor above.
       */
 
-     ros::spinOnce();
+      ros::spinOnce();
 
-     loop_rate.sleep();
-     ++count;
-  }
-
+      loop_rate.sleep();
+      ++count;
+    }
 
     return 0;
+  
 }
+

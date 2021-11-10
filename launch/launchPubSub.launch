@@ -1,0 +1,18 @@
+<launch>
+<arg name="rate" default= "DEFAULT"/>
+<node
+pkg="beginner_tutorials"
+type="talker"
+name="pubTalker"
+respawn="true"
+output="screen"
+args="$(arg rate)"
+/>
+<node
+pkg="beginner_tutorials"
+type="listener"
+name="subListener"
+respawn="true"
+output="screen"
+/>
+</launch>

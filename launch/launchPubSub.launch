@@ -1,12 +1,12 @@
 <launch>
-<arg name="rate" default= "DEFAULT"/>
+<arg name="newString" default= "DEFAULT"/>
 <node
 pkg="beginner_tutorials"
 type="talker"
 name="pubTalker"
 respawn="true"
 output="screen"
-args="$(arg rate)"
+args="$(arg newString)"
 />
 <node
 pkg="beginner_tutorials"

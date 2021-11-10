@@ -3,7 +3,11 @@
 
 # Overview
 Project is a part of 808X coursework wherein the aim is to get familiarized with the basic concepts of ROS.
+
 Task 1: Create a publisher that publishes a custom string message which is then subscribed by the subscriber.
+
+Task 2: Write a service that modiefies the current string . Also write launch files with an argument.
+
 
 # Dependencies
 - Ubuntu 20.04
@@ -17,37 +21,38 @@ git clone https://github.com/viveksood97/beginner_tutorials
 cd ../
 source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
-catkin build
+catkin_make
 ```
 ## Run
-1. Launch both nodes Individually
-Run roscore (Open a new Terminal)
+1. Launch using launch file without string argument
 ```
 cd ~/catkin_ws/
-source /opt/ros/noetic/setup.bash
-roscore
-```
-Run talker node (Open a new Terminal)
-```
-cd ~/catkin_ws/
-source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
-rosrun beginner_tutorials talker
+roslaunch beginner_tutorials launchPubSub.launch
 ```
-Run listener node (Open a new Terminal)
+2. Launch using launch file with string argument
 ```
 cd ~/catkin_ws/
-source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
-rosrun beginner_tutorials listener
+roslaunch beginner_tutorials launchPubSub.launch newString:=anyString
 ```
+3. To change the string use the service: /change_string
+```
+cd ~/catkin_ws/
+source ~/catkin_ws/devel/setup.bash
+rosservice call /change_string AnotherString
+```
+## Output
+The rqt_console and rqt_logger_level output
+![](output.jpg)
+
 ## Run cppcheck and cpplint
 Run cppcheck: Results are stored in `./results/cppcheck.txt` 
 ```
-cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./lib") > results/cppcheck.txt 2>&1
+cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $( find . -name *.cpp) > results/cppcheck.txt 2>&1
 ```
 
 Run cpplint: Results are stored in `./results/cpplint.txt`
 ```
-cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" -e "^./lib/") > results/cpplint.txt 2>&1
+cpplint $( find . -name \*.hpp -or -name \*.cpp) > results/cpplint.txt 2>&1
 ```

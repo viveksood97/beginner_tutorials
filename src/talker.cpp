@@ -17,14 +17,15 @@
 #include "beginner_tutorials/changeString.h"
 
 
+// To avoid cpplint issues
 struct StringContainer {
   std::string currentString;
 } container;
 
 /**
  * @brief Service function to change the current string
- * @param beginner_tutorials::serviceString::Request Request argument
- * @param beginner_tutorials::serviceString::Response Response argument
+ * @param request Request parameter
+ * @param response Response parameter
  * @return void
  */
 void changeCurrentString(

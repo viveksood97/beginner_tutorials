@@ -1,13 +1,10 @@
 /**
  *  @copyright MIT License, © 2021 Vivek Sood
- *  @file    talker.cpp
+ *  @file    listener.cpp
  *  @author  Vivek Sood
  *  @date    11/08/2021
  *  @version 1.0
- *  @brief   Publisher
- *  @section DESCRIPTION
- *  A Publisher node that publishes a string.
- *  @mainpage This is beginners tutorial for creating a simple ROS package.
+ *  @brief   Subscriber
  */
 
   #include "ros/ros.h"

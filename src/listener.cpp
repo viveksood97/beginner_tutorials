@@ -1,21 +1,33 @@
-// Copyright (c) 2021 Vivek Sood
-// Licensed under the MIT License.
-
-
-/// @file   listener.cpp
-/// @author Vivek Sood
-/// @brief ROS Tutorial: Writing Basic Subscriber
+/**
+ *  @copyright MIT License, © 2021 Vivek Sood
+ *  @file    talker.cpp
+ *  @author  Vivek Sood
+ *  @date    11/08/2021
+ *  @version 1.0
+ *  @brief   Publisher
+ *  @section DESCRIPTION
+ *  A Publisher node that publishes a string.
+ *  @mainpage This is beginners tutorial for creating a simple ROS package.
+ */
 
   #include "ros/ros.h"
   #include "std_msgs/String.h"
 
-  /**
-   * This tutorial demonstrates simple receipt of messages over the ROS system.
-   */
+/**
+ * @brief Process the received message
+ * @param msg the message received
+ * @return void
+ */
   void chatterCallback(const std_msgs::String::ConstPtr& msg) {
     ROS_INFO_STREAM("[Listener] Receiving <- " << msg->data.c_str());
   }
 
+  /**
+ * @brief Main function
+ * @param argc number of input arguments
+ * @param argv char pointer containing arguments
+ * @return 0
+ */
   int main(int argc, char **argv) {
     /**
      * The ros::init() function needs to see argc and argv so that it can perform

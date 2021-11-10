@@ -1,9 +1,14 @@
-// Copyright (c) 2021 Vivek Sood
-// Licensed under the MIT License.
-
-/// @file   talker.cpp
-/// @author Vivek Sood
-/// @brief ROS Tutorial: Writing Basic Publisher
+/**
+ *  @copyright MIT License, © 2021 Vivek Sood
+ *  @file    talker.cpp
+ *  @author  Vivek Sood
+ *  @date    11/08/2021
+ *  @version 1.0
+ *  @brief   Publisher
+ *  @section DESCRIPTION
+ *  A Publisher node that publishes a string.
+ *  @mainpage This is beginners tutorial for creating a simple ROS package.
+ */
 
 #include <sstream>
 
@@ -11,18 +16,29 @@
 #include "std_msgs/String.h"
 #include "beginner_tutorials/changeString.h"
 
-std::string currentString;
 
-bool changeCurrentString(
+struct StringContainer {
+  std::string currentString;
+} container;
+
+/**
+ * @brief Service function to change the current string
+ * @param beginner_tutorials::serviceString::Request Request argument
+ * @param beginner_tutorials::serviceString::Response Response argument
+ * @return void
+ */
+void changeCurrentString(
     beginner_tutorials::changeString::Request &request,
     beginner_tutorials::changeString::Response &response) {
   response.after = request.before;
-  currentString = response.after;
-  return true;
+  container.currentString = response.after;
 }
 
 /**
- * This tutorial demonstrates simple sending of messages over the ROS system.
+ * @brief Main function
+ * @param argc number of input arguments
+ * @param argv char pointer containing arguments
+ * @return 0
  */
 int main(int argc, char **argv) {
   /**
@@ -35,7 +51,7 @@ int main(int argc, char **argv) {
    * You must call one of the versions of ros::init() before using any other
    * part of the ROS system.
    */
-  currentString = argv[1];
+  container.currentString = argv[1];
   ros::init(argc, argv, "talker");
 
   if (!ros::ok()) {
@@ -85,18 +101,18 @@ int main(int argc, char **argv) {
      */
       std_msgs::String msg;
 
-      if (currentString == "DEFAULT") {
+      if (container.currentString == "DEFAULT") {
         ROS_WARN_STREAM
         ("The default string \"DEFAULT\" is still unchanged, use service");
       }
 
       std::stringstream ss;
-      ss << currentString << " [id: " << count << "]";
+      ss << container.currentString << " [id: " << count << "]";
       msg.data = ss.str();
-      if (currentString.size() == 0) {
+      if (container.currentString.size() == 0) {
         ROS_ERROR_STREAM("Empty message not allowed");
       } else {
-        ROS_DEBUG_STREAM("Updated String: " << currentString);
+        ROS_DEBUG_STREAM("Updated String: " << container.currentString);
         chatter_pub.publish(msg);
         ++count;
       }
@@ -116,6 +132,6 @@ int main(int argc, char **argv) {
     }
 
     return 0;
-  
 }
+
 

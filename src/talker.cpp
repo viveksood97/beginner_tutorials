@@ -26,13 +26,14 @@ struct StringContainer {
  * @brief Service function to change the current string
  * @param request Request parameter
  * @param response Response parameter
- * @return void
+ * @return true
  */
-void changeCurrentString(
-    beginner_tutorials::changeString::Request &request,
-    beginner_tutorials::changeString::Response &response) {
+bool changeCurrentString(
+  beginner_tutorials::changeString::Request &request,
+  beginner_tutorials::changeString::Response &response) {
   response.after = request.before;
   container.currentString = response.after;
+  return true;
 }
 
 /**

@@ -1,0 +1,16 @@
+(information) Couldn't find path given by -I 'include/'
+Checking src/listener.cpp ...
+src/listener.cpp:63:25: style: Variable 'sub' is assigned a value that is never used. [unreadVariable]
+    ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+                        ^
+1/2 files checked 38% done
+Checking src/talker.cpp ...
+src/talker.cpp:32:48: style: Parameter 'request' can be declared with const [constParameter]
+    beginner_tutorials::changeString::Request &request,
+                                               ^
+src/talker.cpp:69:31: style: Variable 'server' is assigned a value that is never used. [unreadVariable]
+    ros::ServiceServer server =
+                              ^
+2/2 files checked 100% done
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
+

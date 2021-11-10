@@ -10,6 +10,16 @@
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/changeString.h"
+
+std::string currentString = "Default String";
+
+
+bool changeCurrentString(beginner_tutorials::changeString::Request &request, beginner_tutorials::changeString::Response &response) {
+  response.after = request.before;
+  currentString = response.after;
+  return true;
+}
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
@@ -26,6 +36,7 @@ int main(int argc, char **argv) {
    * part of the ROS system.
    */
   ros::init(argc, argv, "talker");
+  
 
   /**
    * NodeHandle is the main access point to communications with the ROS system.
@@ -33,6 +44,7 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
+  ros::ServiceServer server = n.advertiseService("change_string", changeCurrentString);
 
   /**
    * The advertise() function is how you tell ROS that you want to
@@ -67,10 +79,10 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Vivek's talker sending " << count;
+    ss << "Vivek's talker has sent " << currentString << " " << count << " times";
     msg.data = ss.str();
 
-    ROS_INFO("%s", msg.data.c_str());
+    //ROS_INFO("%s", msg.data.c_str());
 
     /**
      * The publish() function is how you send messages. The parameter

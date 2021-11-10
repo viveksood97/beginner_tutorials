@@ -86,20 +86,22 @@ int main(int argc, char **argv) {
       std_msgs::String msg;
 
       if (currentString == "DEFAULT") {
-        ROS_WARN_STREAM("The default string is still unchanged, use service");
+        ROS_WARN_STREAM
+        ("The default string \"DEFAULT\" is still unchanged, use service");
       }
 
       std::stringstream ss;
-      ss << "Vivek's talker has sent " << currentString << " " << count << " times";
+      ss << currentString << " [id: " << count << "]";
       msg.data = ss.str();
       if (currentString.size() == 0) {
         ROS_ERROR_STREAM("Empty message not allowed");
       } else {
         ROS_DEBUG_STREAM("Updated String: " << currentString);
         chatter_pub.publish(msg);
+        ++count;
       }
 
-      ROS_INFO_STREAM(msg.data.c_str());
+      ROS_INFO_STREAM("[Talker] Sending -> " << msg.data.c_str());
 
       /**
      * The publish() function is how you send messages. The parameter
@@ -111,7 +113,6 @@ int main(int argc, char **argv) {
       ros::spinOnce();
 
       loop_rate.sleep();
-      ++count;
     }
 
     return 0;

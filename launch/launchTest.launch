@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+<arg name="newString" default= "DEFAULT"/>
+  <node
+    pkg="beginner_tutorials"
+    type="talker"
+    name="pubTalker"
+    respawn="true"
+    output="screen"
+    args="$(arg newString)"
+  />
+  <test 
+    pkg="beginner_tutorials" 
+    test-name="talker_test" 
+    type="talker_test" 
+  />
+</launch>

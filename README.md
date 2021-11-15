@@ -42,9 +42,37 @@ cd ~/catkin_ws/
 source ~/catkin_ws/devel/setup.bash
 rosservice call /change_string AnotherString
 ```
+4. Launch using launch file with rosbag recording on
+```
+cd ~/catkin_ws/
+source ~/catkin_ws/devel/setup.bash
+roslaunch beginner_tutorials launchPubSub.launch recordbag:=true
+```
 ## Output
 The rqt_console and rqt_logger_level output
 ![](output.jpg)
+
+### Inspecting TF Frames
+After launching both nodes using launch file, inspect the TF frames using tf_echo and rqt_tf_tree (Open a new Terminal)
+
+```
+rosrun tf tf_echo /world /talk
+```
+To genereate a pdf of tf frame
+```
+rosrun tf view_frames
+```
+To view the tf tree
+```
+rosrun rqt_tf_tree rqt_tf_tree
+```
+### Run Test
+Open a new Terminal
+```
+cd ~/catkin_ws
+source ./devel/setup.bash
+rostest beginner_tutorials launchTest.launch
+```
 
 ## Run cppcheck and cpplint
 Run cppcheck: Results are stored in `./results/cppcheck.txt` 

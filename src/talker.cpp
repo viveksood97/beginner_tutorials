@@ -14,7 +14,9 @@
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include <tf/transform_broadcaster.h>
 #include "beginner_tutorials/changeString.h"
+
 
 
 // To avoid cpplint issues
@@ -35,6 +37,8 @@ bool changeCurrentString(
   container.currentString = response.after;
   return true;
 }
+
+
 
 /**
  * @brief Main function
@@ -97,6 +101,10 @@ int main(int argc, char **argv) {
    */
     int count = 0;
 
+    tf::TransformBroadcaster br;
+    tf::Transform transform;
+    tf::Quaternion quaternion;
+
     while (ros::ok()) {
       /**
      * This is a message object. You stuff it with data, and then publish it.
@@ -120,6 +128,13 @@ int main(int argc, char **argv) {
       }
 
       ROS_INFO_STREAM("[Talker] Sending -> " << msg.data.c_str());
+
+      transform.setOrigin(tf::Vector3(10, 10, 10));
+      quaternion.setRPY(10, 20, 30);
+      transform.setRotation(quaternion);
+
+      br.sendTransform(
+      tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
 
       /**
      * The publish() function is how you send messages. The parameter

@@ -9,8 +9,10 @@ project(beginner_tutorials)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  rostest
   std_msgs
   message_generation
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -203,6 +205,13 @@ target_link_libraries(listener ${catkin_LIBRARIES})
 #############
 ## Testing ##
 #############
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest_gtest(talker_test launch/launchTest.launch test/main.cpp test/talker_test.cpp)
+  target_link_libraries(talker_test ${catkin_LIBRARIES})
+  add_dependencies(talker_test talker beginner_tutorials_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
+ endif()
 
 ## Add gtest based cpp test target and link libraries
 # catkin_add_gtest(${PROJECT_NAME}-test test/test_beginner_tutorials.cpp)

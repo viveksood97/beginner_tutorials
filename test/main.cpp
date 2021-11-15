@@ -1,12 +1,12 @@
 /**
- * @file main.cpp
- * @authors Vivek Sood
- * @brief primary source file for testing
- * @date 2021-11-15
- * @copyright Copyright (c) 2021
- *
- * 
+ *  @copyright MIT License, © 2021 Vivek Sood
+ *  @file    main.cpp
+ *  @author  Vivek Sood
+ *  @date    11/15/2021
+ *  @version 1.0
+ *  @brief   Main file to run all tests
  */
+
 
 #include <gtest/gtest.h>
 #include <ros/ros.h>

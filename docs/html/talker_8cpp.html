@@ -94,17 +94,19 @@ $(document).ready(function(){initNavTree('talker_8cpp.html',''); initResizable()
 <div class="textblock"><code>#include &lt;sstream&gt;</code><br />
 <code>#include &quot;ros/ros.h&quot;</code><br />
 <code>#include &quot;std_msgs/String.h&quot;</code><br />
+<code>#include &lt;tf/transform_broadcaster.h&gt;</code><br />
 <code>#include &quot;beginner_tutorials/changeString.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for talker.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="talker_8cpp__incl.png" border="0" usemap="#src_2talker_8cpp" alt=""/></div>
 <map name="src_2talker_8cpp" id="src_2talker_8cpp">
-<area shape="rect" title=" " alt="" coords="156,5,265,32"/>
+<area shape="rect" title=" " alt="" coords="223,5,332,32"/>
 <area shape="rect" title=" " alt="" coords="5,87,80,114"/>
 <area shape="rect" title=" " alt="" coords="105,87,183,114"/>
 <area shape="rect" title=" " alt="" coords="208,87,347,114"/>
-<area shape="rect" title=" " alt="" coords="371,80,511,121"/>
+<area shape="rect" title=" " alt="" coords="371,87,567,114"/>
+<area shape="rect" title=" " alt="" coords="591,80,731,121"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -115,9 +117,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a196bb79841f8125c63ea259cd75a7da1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="talker_8cpp.html#a196bb79841f8125c63ea259cd75a7da1">changeCurrentString</a> (beginner_tutorials::changeString::Request &amp;request, beginner_tutorials::changeString::Response &amp;response)</td></tr>
-<tr class="memdesc:a196bb79841f8125c63ea259cd75a7da1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Service function to change the current string.  <a href="talker_8cpp.html#a196bb79841f8125c63ea259cd75a7da1">More...</a><br /></td></tr>
-<tr class="separator:a196bb79841f8125c63ea259cd75a7da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0f92022b1e133fd5344e805ad099978"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="talker_8cpp.html#ab0f92022b1e133fd5344e805ad099978">changeCurrentString</a> (beginner_tutorials::changeString::Request &amp;request, beginner_tutorials::changeString::Response &amp;response)</td></tr>
+<tr class="memdesc:ab0f92022b1e133fd5344e805ad099978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Service function to change the current string.  <a href="talker_8cpp.html#ab0f92022b1e133fd5344e805ad099978">More...</a><br /></td></tr>
+<tr class="separator:ab0f92022b1e133fd5344e805ad099978"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="talker_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function.  <a href="talker_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,14 +130,14 @@ Variables</h2></td></tr>
 <tr class="separator:ae7a87a114d57c79efdced4f3eb9963b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a196bb79841f8125c63ea259cd75a7da1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a196bb79841f8125c63ea259cd75a7da1">&#9670;&nbsp;</a></span>changeCurrentString()</h2>
+<a id="ab0f92022b1e133fd5344e805ad099978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0f92022b1e133fd5344e805ad099978">&#9670;&nbsp;</a></span>changeCurrentString()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void changeCurrentString </td>
+          <td class="memname">bool changeCurrentString </td>
           <td>(</td>
           <td class="paramtype">beginner_tutorials::changeString::Request &amp;&#160;</td>
           <td class="paramname"><em>request</em>, </td>
@@ -162,7 +164,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd></dl>
 
 </div>
 </div>

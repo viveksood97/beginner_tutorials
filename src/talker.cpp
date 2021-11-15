@@ -74,6 +74,8 @@ int main(int argc, char **argv) {
     ros::ServiceServer server =
         n.advertiseService("change_string", changeCurrentString);
 
+
+
     /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
